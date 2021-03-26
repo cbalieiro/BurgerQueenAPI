@@ -15,7 +15,6 @@ const getAllUsers = async (req, res) => {
 
 const postUser = async (req, res) => {
   const { name, email, password, role, restaurant } = req.body;
-  const resultado = res.result
   try {
     const [user, created] = await base.TBUser.findOrCreate({
       where:{ name, email},
