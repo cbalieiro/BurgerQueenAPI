@@ -13,6 +13,18 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+const getUsersByID = async (req, res) => {
+  const { id } = req.params
+  try {
+    const search = await base.TBUser.findByPk(Number(id));
+    if (search !== null){
+      return res.status(200).json(search);
+    }    
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const postUser = async (req, res) => {
   const { name, email} = req.body;
   try {
@@ -27,4 +39,4 @@ const postUser = async (req, res) => {
   }
 };
 
-module.exports = { getAllUsers, postUser };
+module.exports = { getAllUsers, postUser , getUsersByID };
