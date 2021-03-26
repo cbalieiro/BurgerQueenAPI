@@ -25,7 +25,7 @@ const postProduct = async (req, res) => {
   const bodyInput = req.body;
   try {
     const created = await base.TBProducts.create(bodyInput);
-    return res.status(201).json(created)
+    return res.status(201).json(created);
   } catch (error) {
     console.log(error);
   }
@@ -33,14 +33,12 @@ const postProduct = async (req, res) => {
 
 const putProductByID = async (req, res) => {
   const { id } = req.params;
-  const { name, password, role, restaurant } = req.body;
+  const { image, price } = req.body;
   try {
     const updated = await base.TBProducts.update(
       {
-        name: name,
-        password: password,
-        role: role,
-        restaurant: restaurant,
+        image: image,
+        price: price,
       },
       {
         where: {
@@ -56,14 +54,12 @@ const putProductByID = async (req, res) => {
 
 const deleteProductByID = async (req, res) => {
   const { id } = req.params;
-   try {
-    const updated = await base.TBProducts.destroy(
-      {
-        where: {
-          id: Number(id),
-        },
-      }
-    );
+  try {
+    const updated = await base.TBProducts.destroy({
+      where: {
+        id: Number(id),
+      },
+    });
     return res.status(201).json(updated);
   } catch (error) {
     console.log(error);
