@@ -10,6 +10,10 @@ app.use(cors());
 app.use(express.json());
 app.use("/", routes);
 
+app.get("/", (req, res) => {
+  res.send("Welcome to the API developed by @cbalieiro!!!");
+});
+
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening at http://localhost:${port}`);
