@@ -14,29 +14,29 @@ const getAllUsers = async (req, res) => {
 };
 
 const getUsersByID = async (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
   try {
     const search = await base.TBUser.findByPk(Number(id));
-    if (search !== null){
+    if (search !== null) {
       return res.status(200).json(search);
-    }    
+    }
   } catch (error) {
     console.log(error);
   }
 };
 
 const postUser = async (req, res) => {
-  const { name, email} = req.body;
+  const { name, email } = req.body;
   try {
     const [user, created] = await base.TBUser.findOrCreate({
-      where:{ name, email},
-      defaults:req.body
-    })
-    console.log (created)
-    console.log(user)
+      where: { name, email },
+      defaults: req.body,
+    });
+    console.log(created);
+    console.log(user);
   } catch (error) {
     console.log(error);
   }
 };
 
-module.exports = { getAllUsers, postUser , getUsersByID };
+module.exports = { getAllUsers, postUser, getUsersByID };
