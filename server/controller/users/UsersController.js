@@ -26,10 +26,10 @@ const getUsersByID = async (req, res) => {
 };
 
 const postUser = async (req, res) => {
-  const { name, email } = req.body;
+  const { email } = req.body;
   try {
     const [user, created] = await base.TBUser.findOrCreate({
-      where: { name, email },
+      where: { email },
       defaults: req.body,
     });
     console.log(created);
@@ -40,14 +40,39 @@ const postUser = async (req, res) => {
 };
 
 const putUserByID = async (req, res) => {
+  const { id } = req.params;
+  const { name, password, role, restaurant } = req.body;
   try {
+    const updated = await base.TBUser.update(
+      {
+        name: name,
+        password: password,
+        role: role,
+        restaurant: restaurant,
+      },
+      {
+        where: {
+          id: Number(id),
+        },
+      }
+    );
+    return res.status(201).json(updated);
   } catch (error) {
     console.log(error);
   }
 };
 
 const deleteUserByID = async (req, res) => {
-  try {
+  const { id } = req.params;
+   try {
+    const updated = await base.TBUser.destroy(
+      {
+        where: {
+          id: Number(id),
+        },
+      }
+    );
+    return res.status(201).json(updated);
   } catch (error) {
     console.log(error);
   }
