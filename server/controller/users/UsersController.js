@@ -1,13 +1,31 @@
-// aqui vai o código que acessa o banco de dados
+const base = require("../../db/models");
 
-const getAllUsers = (req, res) => {
-  console.log("você também pode utilizar o console para visualizar =)")
-  res.send("Ver todos os usuarios")
-}
+const getAllUsers = async (req, res) => {
+  try {
+    const search = await base.TBUser.findAll({
+      attributes: {
+        exclude: ["password"],
+      },
+    });
+    return res.status(200).json(search);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-const postUser = (req, res) => {
-  console.log("você também pode utilizar o console para visualizar =)")
-  res.send("Criar usuario")
-}
+const postUser = async (req, res) => {
+  const { name, email, password, role, restaurant } = req.body;
+  const resultado = res.result
+  try {
+    const [user, created] = await base.TBUser.findOrCreate({
+      where:{ name, email},
+      defaults:req.body
+    })
+    console.log (created)
+    console.log(user)
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-module.exports = { getAllExamples }
+module.exports = { getAllUsers, postUser };
