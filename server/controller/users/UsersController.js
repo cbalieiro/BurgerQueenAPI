@@ -16,7 +16,14 @@ const getAllUsers = async (req, res) => {
 const getUsersByID = async (req, res) => {
   const { id } = req.params;
   try {
-    const search = await base.TBUser.findByPk(Number(id));
+    const search = await base.TBUser.findAll({
+      where: {
+        id: Number(id),
+      },
+      attributes: {
+        exclude: ["password"],
+      },
+    });
     if (search !== null) {
       return res.status(200).json(search);
     }
@@ -41,7 +48,7 @@ const postUser = async (req, res) => {
 
 const putUserByID = async (req, res) => {
   const { id } = req.params;
-  const { name, password, role, restaurant } = req.body;
+  const { name, password, role } = req.body;
   try {
     const updated = await base.TBUser.update(
       {
@@ -64,14 +71,12 @@ const putUserByID = async (req, res) => {
 
 const deleteUserByID = async (req, res) => {
   const { id } = req.params;
-   try {
-    const updated = await base.TBUser.destroy(
-      {
-        where: {
-          id: Number(id),
-        },
-      }
-    );
+  try {
+    const updated = await base.TBUser.destroy({
+      where: {
+        id: Number(id),
+      },
+    });
     return res.status(201).json(updated);
   } catch (error) {
     console.log(error);
