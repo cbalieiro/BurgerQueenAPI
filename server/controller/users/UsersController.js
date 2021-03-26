@@ -55,7 +55,6 @@ const putUserByID = async (req, res) => {
         name: name,
         password: password,
         role: role,
-        restaurant: restaurant,
       },
       {
         where: {
