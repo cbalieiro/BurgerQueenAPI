@@ -2,11 +2,7 @@ const base = require("../../db/models");
 
 const getAllProducts = async (req, res) => {
   try {
-    const search = await base.TBProducts.findAll({
-      attributes: {
-        exclude: ["password"],
-      },
-    });
+    const search = await base.TBUser.findAll();
     return res.status(200).json(search);
   } catch (error) {
     console.log(error);
@@ -26,14 +22,10 @@ const getProductsByID = async (req, res) => {
 };
 
 const postProduct = async (req, res) => {
-  const { email } = req.body;
+  const bodyInput = req.body;
   try {
-    const [user, created] = await base.TBProducts.findOrCreate({
-      where: { email },
-      defaults: req.body,
-    });
-    console.log(created);
-    console.log(user);
+    const created = await base.TBProducts.create(bodyInput);
+    return res.status(201).json(created)
   } catch (error) {
     console.log(error);
   }
