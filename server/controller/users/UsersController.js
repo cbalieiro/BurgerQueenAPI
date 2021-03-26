@@ -57,6 +57,6 @@ module.exports = {
   getAllUsers,
   getUsersByID,
   postUser,
-  putByUser,
-  deleteByUser,
+  putUserByID,
+  deleteUserByID,
 };
