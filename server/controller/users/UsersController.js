@@ -39,4 +39,24 @@ const postUser = async (req, res) => {
   }
 };
 
-module.exports = { getAllUsers, postUser, getUsersByID };
+const putUserByID = async (req, res) => {
+  try {
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const deleteUserByID = async (req, res) => {
+  try {
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = {
+  getAllUsers,
+  getUsersByID,
+  postUser,
+  putByUser,
+  deleteByUser,
+};
