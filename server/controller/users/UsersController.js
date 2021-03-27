@@ -1,16 +1,17 @@
 const base = require("../../db/models");
 const functions = require("../../sequilezeFunctions");
 
-const getAllUsers = (req, res) => {
+const getAllUsers = (req, res, next) => {
   const parameters = { attributes: { exclude: ["password"] } };
   const databaseCall = functions
     .findAllSelect(base.TBUsers, parameters)
     .then((data) => {
       return res.status(200).json(data);
-    });
+    })
+    .catch(next);
 };
 
-const getUsersByID = (req, res) => {
+const getUsersByID = (req, res, next) => {
   const { id } = req.params;
   const parameters = {
     where: {
@@ -24,10 +25,11 @@ const getUsersByID = (req, res) => {
     .findAllSelect(base.TBUsers, parameters)
     .then((data) => {
       return res.status(200).json(data);
-    });
+    })
+    .catch(next);
 };
 
-const postUser = async (req, res) => {
+const postUser = async (req, res, next) => {
   const { email } = req.body;
   const parameters = {
     where: { email },
@@ -37,10 +39,11 @@ const postUser = async (req, res) => {
     .createSelectInsert(base.TBUsers, parameters)
     .then((data) => {
       return res.status(201).json(data);
-    });
+    })
+    .catch(next);
 };
 
-const putUserByID = async (req, res) => {
+const putUserByID = async (req, res, next) => {
   const { id } = req.params;
   const { name, password, role } = req.body;
   const databaseCall = functions
@@ -59,17 +62,19 @@ const putUserByID = async (req, res) => {
     )
     .then((data) => {
       return res.status(201).json(data);
-    });
+    })
+    .catch(next);
 };
 
-const deleteUserByID = async (req, res) => {
+const deleteUserByID = async (req, res, next) => {
   const { id } = req.params;
   const parameters = { where: { id: Number(id) } };
   const databaseCall = functions
     .destroyDelete(base.TBUsers, parameters)
     .then((data) => {
       return res.status(201).json(data);
-    });
+    })
+    .catch(next);
 };
 
 module.exports = {
