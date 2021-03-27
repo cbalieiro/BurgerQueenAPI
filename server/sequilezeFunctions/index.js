@@ -7,9 +7,9 @@ const findAllSelect = async (base, ...args) => {
   }
 };
 
-const findByPkSelect = async (base, ...args) => {
+const findByPkSelect = async (base, id) => {
   try {
-    const response = await base.findByPk(Number(...args));
+    const response = await base.findByPk(Number(id));
     return response;
   } catch {
     // alert('Ops! Something went wrong. Please, try again.')
