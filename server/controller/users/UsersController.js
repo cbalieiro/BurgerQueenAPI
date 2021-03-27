@@ -44,8 +44,9 @@ const postUser = async (req, res) => {
 const putUserByID = async (req, res) => {
   const { id } = req.params;
   const { name, password, role } = req.body;
-  try {
-    const updated = await base.TBUser.update(
+  const databaseCall = functions
+    .updateDB(
+      base.TBUser,
       {
         name: name,
         password: password,
@@ -56,16 +57,15 @@ const putUserByID = async (req, res) => {
           id: Number(id),
         },
       }
-    );
-    return res.status(201).json(updated);
-  } catch (error) {
-    console.log(error);
-  }
+    )
+    .then((data) => {
+      return res.status(201).json(data);
+    });
 };
 
 const deleteUserByID = async (req, res) => {
   const { id } = req.params;
-  const parameters = {where: {id: Number(id),}};
+  const parameters = { where: { id: Number(id) } };
   const databaseCall = functions
     .destroyDelete(base.TBUser, parameters)
     .then((data) => {

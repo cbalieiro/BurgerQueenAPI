@@ -2,9 +2,9 @@ const base = require("../../db/models");
 const functions = require("../../sequilezeFunctions");
 
 const getAllProducts = (req, res) => {
-  const databaseCall = functions
-  .findAllSelect(base.TBProducts)
-  .then((data) => {return res.status(200).json(data)});
+  const databaseCall = functions.findAllSelect(base.TBProducts).then((data) => {
+    return res.status(200).json(data);
+  });
 };
 
 const getProductsByID = (req, res) => {
@@ -28,27 +28,24 @@ const postProduct = (req, res) => {
 const putProductByID = async (req, res) => {
   const { id } = req.params;
   const { image, price } = req.body;
-  try {
-    const updated = await base.TBProducts.update(
-      {
-        image: image,
-        price: price,
+  const databaseCall = functions
+    .updateDB(base.TBProducts, {
+      image: image,
+      price: price,
+    },
+    {
+      where: {
+        id: Number(id),
       },
-      {
-        where: {
-          id: Number(id),
-        },
-      }
-    );
-    return res.status(201).json(updated);
-  } catch (error) {
-    console.log(error);
-  }
+    })
+    .then((data) => {
+      return res.status(201).json(data);
+    });
 };
 
 const deleteProductByID = async (req, res) => {
   const { id } = req.params;
-  const parameters = {where: {id: Number(id),}};
+  const parameters = { where: { id: Number(id) } };
   const databaseCall = functions
     .destroyDelete(base.TBProducts, parameters)
     .then((data) => {

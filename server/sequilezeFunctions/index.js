@@ -34,9 +34,9 @@ const createSelectInsert = async (base, ...args) => {
   }
 };
 
-const update = async (base, parameters) => {
+const updateDB = async (base, ...args) => {
   try {
-    const response = await base.update(parameters);
+    const response = await base.update(...args);
     return response;
   } catch {
     // alert('Ops! Something went wrong. Please, try again.')
@@ -57,6 +57,6 @@ module.exports = {
   findByPkSelect,
   createInsert,
   createSelectInsert,
-  update,
+  updateDB,
   destroyDelete,
 };
