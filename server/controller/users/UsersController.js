@@ -29,16 +29,15 @@ const getUsersByID = (req, res) => {
 
 const postUser = async (req, res) => {
   const { email } = req.body;
-  try {
-    const [user, created] = await base.TBUser.findOrCreate({
-      where: { email },
-      defaults: req.body,
-    });
-    console.log(created);
-    console.log(user);
-  } catch (error) {
-    console.log(error);
+  const parameters = {
+    where: { email },
+    defaults: req.body,
   }
+  const databaseCall = functions
+  .createSelectInsert(base.TBUser, parameters)
+  .then((data) => {
+    return res.status(201).json(data);
+  });
 };
 
 const putUserByID = async (req, res) => {
