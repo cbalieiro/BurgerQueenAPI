@@ -48,16 +48,24 @@ const putProductByID = async (req, res) => {
 
 const deleteProductByID = async (req, res) => {
   const { id } = req.params;
-  try {
-    const updated = await base.TBProducts.destroy({
-      where: {
-        id: Number(id),
-      },
+  const parameters = {where: {id: Number(id),}};
+  const databaseCall = functions
+    .destroyDelete(base.TBProducts, parameters)
+    .then((data) => {
+      return res.status(201).json(data);
     });
-    return res.status(201).json(updated);
-  } catch (error) {
-    console.log(error);
-  }
+
+
+  // try {
+  //   const updated = await base.TBProducts.destroy({
+  //     where: {
+  //       id: Number(id),
+  //     },
+  //   });
+  //   return res.status(201).json(updated);
+  // } catch (error) {
+  //   console.log(error);
+  // }
 };
 
 module.exports = {

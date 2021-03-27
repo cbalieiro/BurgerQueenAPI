@@ -65,16 +65,23 @@ const putUserByID = async (req, res) => {
 
 const deleteUserByID = async (req, res) => {
   const { id } = req.params;
-  try {
-    const updated = await base.TBUser.destroy({
-      where: {
-        id: Number(id),
-      },
+  const parameters = {where: {id: Number(id),}};
+  const databaseCall = functions
+    .destroyDelete(base.TBUser, parameters)
+    .then((data) => {
+      return res.status(201).json(data);
     });
-    return res.status(201).json(updated);
-  } catch (error) {
-    console.log(error);
-  }
+
+  // try {
+  //   const updated = await base.TBUser.destroy({
+  //     where: {
+  //       id: Number(id),
+  //     },
+  //   });
+  //   return res.status(201).json(updated);
+  // } catch (error) {
+  //   console.log(error);
+  // }
 };
 
 module.exports = {

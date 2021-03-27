@@ -26,17 +26,37 @@ const createInsert = async (base, ...args) => {
 };
 
 const createSelectInsert = async (base, ...args) => {
-    try {
-      const response = await base.findOrCreate(...args);
-      return response;
-    } catch {
-      // alert('Ops! Something went wrong. Please, try again.')
-    }
-  };
+  try {
+    const response = await base.findOrCreate(...args);
+    return response;
+  } catch {
+    // alert('Ops! Something went wrong. Please, try again.')
+  }
+};
+
+const update = async (base, ...args) => {
+  try {
+    const response = await base.update(...args);
+    return response;
+  } catch {
+    // alert('Ops! Something went wrong. Please, try again.')
+  }
+};
+
+const destroyDelete = async (base, ...args) => {
+  try {
+    const response = await base.destroy(...args);
+    return response;
+  } catch {
+    // alert('Ops! Something went wrong. Please, try again.')
+  }
+};
 
 module.exports = {
   findAllSelect,
   findByPkSelect,
   createInsert,
-  createSelectInsert
+  createSelectInsert,
+  update,
+  destroyDelete
 };
