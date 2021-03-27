@@ -32,12 +32,12 @@ const postUser = async (req, res) => {
   const parameters = {
     where: { email },
     defaults: req.body,
-  }
+  };
   const databaseCall = functions
-  .createSelectInsert(base.TBUser, parameters)
-  .then((data) => {
-    return res.status(201).json(data);
-  });
+    .createSelectInsert(base.TBUser, parameters)
+    .then((data) => {
+      return res.status(201).json(data);
+    });
 };
 
 const putUserByID = async (req, res) => {

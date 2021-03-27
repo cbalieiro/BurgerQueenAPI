@@ -29,15 +29,18 @@ const putProductByID = async (req, res) => {
   const { id } = req.params;
   const { image, price } = req.body;
   const databaseCall = functions
-    .updateDB(base.TBProducts, {
-      image: image,
-      price: price,
-    },
-    {
-      where: {
-        id: Number(id),
+    .updateDB(
+      base.TBProducts,
+      {
+        image: image,
+        price: price,
       },
-    })
+      {
+        where: {
+          id: Number(id),
+        },
+      }
+    )
     .then((data) => {
       return res.status(201).json(data);
     });
