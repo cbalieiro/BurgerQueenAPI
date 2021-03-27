@@ -7,7 +7,7 @@ const getAllProducts = (req, res) => {
   .then((data) => {return res.status(200).json(data)});
 };
 
-const getProductsByID = async (req, res) => {
+const getProductsByID = (req, res) => {
   const { id } = req.params;
   const databaseCall = functions
     .findByPkSelect(base.TBProducts, id)
@@ -16,14 +16,13 @@ const getProductsByID = async (req, res) => {
     });
 };
 
-const postProduct = async (req, res) => {
+const postProduct = (req, res) => {
   const bodyInput = req.body;
-  try {
-    const created = await base.TBProducts.create(bodyInput);
-    return res.status(201).json(created);
-  } catch (error) {
-    console.log(error);
-  }
+  const databaseCall = functions
+    .createInsert(base.TBProducts, bodyInput)
+    .then((data) => {
+      return res.status(201).json(data);
+    });
 };
 
 const putProductByID = async (req, res) => {

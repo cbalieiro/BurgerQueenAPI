@@ -8,8 +8,26 @@ const findAllSelect = async (base, ...args) => {
 };
 
 const findByPkSelect = async (base, ...args) => {
+  try {
+    const response = await base.findByPk(Number(...args));
+    return response;
+  } catch {
+    // alert('Ops! Something went wrong. Please, try again.')
+  }
+};
+
+const createInsert = async (base, ...args) => {
+  try {
+    const response = await base.create(...args);
+    return response;
+  } catch {
+    // alert('Ops! Something went wrong. Please, try again.')
+  }
+};
+
+const createSelectInsert = async (base, ...args) => {
     try {
-      const response = await base.findByPk(Number(...args));
+      const response = await base.findOrCreate(...args);
       return response;
     } catch {
       // alert('Ops! Something went wrong. Please, try again.')
@@ -17,6 +35,8 @@ const findByPkSelect = async (base, ...args) => {
   };
 
 module.exports = {
-  findSelect,
+  findAllSelect,
   findByPkSelect,
+  createInsert,
+  createSelectInsert
 };

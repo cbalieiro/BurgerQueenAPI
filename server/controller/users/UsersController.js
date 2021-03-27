@@ -10,7 +10,7 @@ const getAllUsers = (req, res) => {
     });
 };
 
-const getUsersByID = async (req, res) => {
+const getUsersByID = (req, res) => {
   const { id } = req.params;
   const parameters = {
     where: {
