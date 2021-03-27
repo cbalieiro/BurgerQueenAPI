@@ -1,7 +1,7 @@
 const base = require("../../db/models");
 const functions = require("../../sequilezeFunctions");
 
-const getAllProducts = async (req, res) => {
+const getAllProducts = (req, res) => {
   const databaseCall = functions
   .findSelect(base.TBProducts)
   .then((data) => {return res.status(200).json(data)});
@@ -9,14 +9,11 @@ const getAllProducts = async (req, res) => {
 
 const getProductsByID = async (req, res) => {
   const { id } = req.params;
-  try {
-    const search = await base.TBProducts.findByPk(Number(id));
-    if (search !== null) {
-      return res.status(200).json(search);
-    }
-  } catch (error) {
-    console.log(error);
-  }
+  const databaseCall = functions
+    .findByPkSelect(base.TBProducts, id)
+    .then((data) => {
+      return res.status(200).json(data);
+    });
 };
 
 const postProduct = async (req, res) => {
