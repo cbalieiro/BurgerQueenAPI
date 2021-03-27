@@ -1,35 +1,30 @@
 const base = require("../../db/models");
+const functions = require("../../sequilezeFunctions");
 
-const getAllUsers = async (req, res) => {
-  try {
-    const search = await base.TBUser.findAll({
-      attributes: {
-        exclude: ["password"],
-      },
+const getAllUsers = (req, res) => {
+  const parameters = { attributes: { exclude: ["password"] } };
+  const databaseCall = functions
+    .findSelect(base.TBUser, parameters)
+    .then((data) => {
+      return res.status(200).json(data);
     });
-    return res.status(200).json(search);
-  } catch (error) {
-    console.log(error);
-  }
 };
 
 const getUsersByID = async (req, res) => {
   const { id } = req.params;
-  try {
-    const search = await base.TBUser.findAll({
-      where: {
-        id: Number(id),
-      },
-      attributes: {
-        exclude: ["password"],
-      },
+  const parameters = {
+    where: {
+      id: Number(id),
+    },
+    attributes: {
+      exclude: ["password"],
+    },
+  };
+  const databaseCall = functions
+    .findSelect(base.TBUser, parameters)
+    .then((data) => {
+      return res.status(200).json(data);
     });
-    if (search !== null) {
-      return res.status(200).json(search);
-    }
-  } catch (error) {
-    console.log(error);
-  }
 };
 
 const postUser = async (req, res) => {

@@ -1,12 +1,10 @@
 const base = require("../../db/models");
+const functions = require("../../sequilezeFunctions");
 
 const getAllProducts = async (req, res) => {
-  try {
-    const search = await base.TBUser.findAll();
-    return res.status(200).json(search);
-  } catch (error) {
-    console.log(error);
-  }
+  const databaseCall = functions
+  .findSelect(base.TBProducts)
+  .then((data) => {return res.status(200).json(data)});
 };
 
 const getProductsByID = async (req, res) => {
