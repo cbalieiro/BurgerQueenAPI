@@ -34,18 +34,18 @@ const createSelectInsert = async (base, ...args) => {
   }
 };
 
-const update = async (base, ...args) => {
+const update = async (base, parameters) => {
   try {
-    const response = await base.update(...args);
+    const response = await base.update(parameters);
     return response;
   } catch {
     // alert('Ops! Something went wrong. Please, try again.')
   }
 };
 
-const destroyDelete = async (base, ...args) => {
+const destroyDelete = async (base, parameters) => {
   try {
-    const response = await base.destroy(...args);
+    const response = await base.destroy(parameters);
     return response;
   } catch {
     // alert('Ops! Something went wrong. Please, try again.')
@@ -58,5 +58,5 @@ module.exports = {
   createInsert,
   createSelectInsert,
   update,
-  destroyDelete
+  destroyDelete,
 };

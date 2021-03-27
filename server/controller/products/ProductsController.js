@@ -54,18 +54,6 @@ const deleteProductByID = async (req, res) => {
     .then((data) => {
       return res.status(201).json(data);
     });
-
-
-  // try {
-  //   const updated = await base.TBProducts.destroy({
-  //     where: {
-  //       id: Number(id),
-  //     },
-  //   });
-  //   return res.status(201).json(updated);
-  // } catch (error) {
-  //   console.log(error);
-  // }
 };
 
 module.exports = {

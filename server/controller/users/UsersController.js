@@ -71,17 +71,6 @@ const deleteUserByID = async (req, res) => {
     .then((data) => {
       return res.status(201).json(data);
     });
-
-  // try {
-  //   const updated = await base.TBUser.destroy({
-  //     where: {
-  //       id: Number(id),
-  //     },
-  //   });
-  //   return res.status(201).json(updated);
-  // } catch (error) {
-  //   console.log(error);
-  // }
 };
 
 module.exports = {
