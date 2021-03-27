@@ -61,9 +61,20 @@ const putUserByID = async (req, res, next) => {
       }
     )
     .then((data) => {
-      return res
-        .status(201)
-        .json({ status: "The user information has been successfully changed" });
+      if (data === 1 || data === true) {
+        return res
+          .status(201)
+          .json({
+            status: "User information has been successfully changed"
+          });
+        }
+      if (data === 0 || data === false) {
+        return res
+          .status(400)
+          .json({
+            status: "User information couldn't be changed"
+          });
+      }
     })
     .catch(next);
 };
