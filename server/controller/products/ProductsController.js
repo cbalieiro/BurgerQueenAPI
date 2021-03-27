@@ -3,7 +3,7 @@ const functions = require("../../sequilezeFunctions");
 
 const getAllProducts = (req, res) => {
   const databaseCall = functions
-  .findSelect(base.TBProducts)
+  .findAllSelect(base.TBProducts)
   .then((data) => {return res.status(200).json(data)});
 };
 

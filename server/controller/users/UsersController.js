@@ -4,7 +4,7 @@ const functions = require("../../sequilezeFunctions");
 const getAllUsers = (req, res) => {
   const parameters = { attributes: { exclude: ["password"] } };
   const databaseCall = functions
-    .findSelect(base.TBUser, parameters)
+    .findAllSelect(base.TBUser, parameters)
     .then((data) => {
       return res.status(200).json(data);
     });
@@ -21,7 +21,7 @@ const getUsersByID = async (req, res) => {
     },
   };
   const databaseCall = functions
-    .findSelect(base.TBUser, parameters)
+    .findAllSelect(base.TBUser, parameters)
     .then((data) => {
       return res.status(200).json(data);
     });

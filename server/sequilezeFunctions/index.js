@@ -1,4 +1,4 @@
-const findSelect = async (base, ...args) => {
+const findAllSelect = async (base, ...args) => {
   try {
     const response = await base.findAll(...args);
     return response;
