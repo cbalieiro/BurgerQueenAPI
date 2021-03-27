@@ -38,6 +38,7 @@ const postUser = async (req, res, next) => {
   functions
     .createSelectInsert(base.TBUsers, parameters)
     .then((data) => {
+      console.log(data); /** corrigir tratativa de errors */
       return res.status(201).json(data);
     })
     .catch(next);
