@@ -9,6 +9,11 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use("/", routes);
+app.use((err, req, res, next) => {
+  if (process.env.NODE_ENV === "production")
+    res.status(500).json({ error: "internal server error" });
+  else return next(error);
+});
 
 app.get("/", (req, res) => {
   res.send("Welcome to the API developed by @cbalieiro!!!");
