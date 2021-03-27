@@ -1,55 +1,31 @@
 const findAllSelect = async (base, ...args) => {
-  try {
-    const response = await base.findAll(...args);
-    return response;
-  } catch {
-    // alert('Ops! Something went wrong. Please, try again.')
-  }
+  const response = await base.findAll(...args);
+  return response;
 };
 
 const findByPkSelect = async (base, id) => {
-  try {
-    const response = await base.findByPk(Number(id));
-    return response;
-  } catch {
-    // alert('Ops! Something went wrong. Please, try again.')
-  }
+  const response = await base.findByPk(Number(id));
+  return response;
 };
 
 const createInsert = async (base, ...args) => {
-  try {
-    const response = await base.create(...args);
-    return response;
-  } catch {
-    // alert('Ops! Something went wrong. Please, try again.')
-  }
+  const response = await base.create(...args);
+  return response;
 };
 
 const createSelectInsert = async (base, ...args) => {
-  try {
-    const response = await base.findOrCreate(...args);
-    return response;
-  } catch {
-    // alert('Ops! Something went wrong. Please, try again.')
-  }
+  const response = await base.findOrCreate(...args);
+  return response;
 };
 
 const updateDB = async (base, ...args) => {
-  try {
-    const response = await base.update(...args);
-    return response;
-  } catch {
-    // alert('Ops! Something went wrong. Please, try again.')
-  }
+  const response = await base.update(...args);
+  return response;
 };
 
 const destroyDelete = async (base, parameters) => {
-  try {
-    const response = await base.destroy(parameters);
-    return response;
-  } catch {
-    // alert('Ops! Something went wrong. Please, try again.')
-  }
+  const response = await base.destroy(parameters);
+  return response;
 };
 
 module.exports = {

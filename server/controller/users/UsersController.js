@@ -4,7 +4,7 @@ const functions = require("../../sequilezeFunctions");
 const getAllUsers = (req, res) => {
   const parameters = { attributes: { exclude: ["password"] } };
   const databaseCall = functions
-    .findAllSelect(base.TBUser, parameters)
+    .findAllSelect(base.TBUsers, parameters)
     .then((data) => {
       return res.status(200).json(data);
     });
@@ -21,7 +21,7 @@ const getUsersByID = (req, res) => {
     },
   };
   const databaseCall = functions
-    .findAllSelect(base.TBUser, parameters)
+    .findAllSelect(base.TBUsers, parameters)
     .then((data) => {
       return res.status(200).json(data);
     });
@@ -34,7 +34,7 @@ const postUser = async (req, res) => {
     defaults: req.body,
   };
   const databaseCall = functions
-    .createSelectInsert(base.TBUser, parameters)
+    .createSelectInsert(base.TBUsers, parameters)
     .then((data) => {
       return res.status(201).json(data);
     });
@@ -45,7 +45,7 @@ const putUserByID = async (req, res) => {
   const { name, password, role } = req.body;
   const databaseCall = functions
     .updateDB(
-      base.TBUser,
+      base.TBUsers,
       {
         name: name,
         password: password,
@@ -66,7 +66,7 @@ const deleteUserByID = async (req, res) => {
   const { id } = req.params;
   const parameters = { where: { id: Number(id) } };
   const databaseCall = functions
-    .destroyDelete(base.TBUser, parameters)
+    .destroyDelete(base.TBUsers, parameters)
     .then((data) => {
       return res.status(201).json(data);
     });

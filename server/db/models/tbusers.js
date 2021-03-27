@@ -1,72 +1,78 @@
-"use strict";
 const { Model } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
-  class TBProducts extends Model {
+  class TBUsers extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+    // eslint-disable-next-line no-unused-vars
     static associate(models) {
       // define association here
     }
   }
-  TBProducts.init(
+  TBUsers.init(
     {
       name: {
         allowNull: false,
         type: DataTypes.STRING,
+        unique: true,
         validate: {
           notEmpty: {
             msg: "The Name field must not be empty",
           },
         },
       },
-      typeProducts: {
-        allowNull: true,
-        type: DataTypes.STRING,
-      },
-      category: {
+      email: {
         allowNull: false,
         type: DataTypes.STRING,
+        unique: true,
         validate: {
+          isEmail: {
+            msg: "This field must contain a valid email address",
+          },
           notEmpty: {
-            msg: "The Category field must not be empty",
+            msg: "The Email field must not be empty",
           },
         },
       },
-      image: {
+      password: {
         allowNull: false,
         type: DataTypes.STRING,
         validate: {
           notEmpty: {
-            msg: "The Image field must not be empty",
+            msg: "The Password field must not be empty",
+          },
+          len: {
+            args: [4, 20],
+            msg: "Password must be 4-20 characters",
           },
         },
       },
-      price: {
+      role: {
         allowNull: false,
         type: DataTypes.STRING,
         validate: {
           notEmpty: {
-            msg: "The Price field must not be empty",
+            msg: "The Role field must not be empty",
           },
         },
       },
-      typeMenu: {
+      restaurant: {
         allowNull: false,
         type: DataTypes.STRING,
         validate: {
           notEmpty: {
-            msg: "The TypeMenu field must not be empty",
+            msg: "The Restaurant field must not be empty",
           },
         },
       },
     },
     {
       sequelize,
-      modelName: "TBProducts",
+      modelName: "TBUsers",
     }
   );
-  return TBProducts;
+  return TBUsers;
 };
