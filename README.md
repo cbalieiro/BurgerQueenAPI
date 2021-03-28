@@ -1,6 +1,5 @@
 # Burger Queen API  - Back-end (readMe em Construção)
 
-<br/>
 
 🌟 Uma _API rest_ para pedidos em um restaurante 🍔. Link para consumo da API [clique aqui!]() 🌟 
 
