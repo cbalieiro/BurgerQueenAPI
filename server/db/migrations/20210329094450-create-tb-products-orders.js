@@ -15,7 +15,7 @@ module.exports = {
       productsID: {
         allowNull: false,
         type: Sequelize.UUID,
-        reference: {
+        references: {
           model:'TBProducts' ,
           key:'id'
         }
@@ -23,7 +23,7 @@ module.exports = {
       ordersID: {
         allowNull: false,
         type: Sequelize.UUID,
-        reference: {
+        references: {
           model:'TBOrders' ,
           key:'id'
         }

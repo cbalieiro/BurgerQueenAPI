@@ -13,7 +13,7 @@ module.exports = {
       },
       userID: {
         type: Sequelize.UUID,
-        reference: {
+        references: {
           model: "TBUsers",
           key: "id",
         },
