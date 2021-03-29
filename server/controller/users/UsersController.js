@@ -30,10 +30,10 @@ const getUsersByID = (req, res, next) => {
 };
 
 const postUser = async (req, res, next) => {
-  const { email } = req.body;
+  const { email, name, password, role, restaurante } = req.body;
   const parameters = {
     where: { email },
-    defaults: req.body,
+    defaults: { email, name, password, role, restaurante },
   };
   functions
     .createSelectInsert(base.TBUsers, parameters)
@@ -63,18 +63,14 @@ const putUserByID = async (req, res, next) => {
     )
     .then((data) => {
       if (data === 1 || data === true) {
-        return res
-          .status(201)
-          .json({
-            status: "User information has been successfully changed"
-          });
-        }
+        return res.status(201).json({
+          status: "User information has been successfully changed",
+        });
+      }
       if (data === 0 || data === false) {
-        return res
-          .status(400)
-          .json({
-            status: "User information couldn't be changed"
-          });
+        return res.status(400).json({
+          status: "User information couldn't be changed",
+        });
       }
     })
     .catch(next);

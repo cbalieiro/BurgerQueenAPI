@@ -8,25 +8,22 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id: {
-        allowNull: false,
-        type: Sequelize.UUID
-      },
       productsID: {
         allowNull: false,
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
         references: {
-          model:'TBProducts' ,
+          model:'TBProducts',
           key:'id'
         }
       },
       ordersID: {
         allowNull: false,
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
         references: {
           model:'TBOrders' ,
           key:'id'
-        }
+        },
+        onDelete:'CASCADE',
       },
       qtd: {
         allowNull: false,

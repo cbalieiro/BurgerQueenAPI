@@ -8,15 +8,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      id: {
-        type: Sequelize.UUID,
-      },
       userID: {
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
         references: {
           model: "TBUsers",
           key: "id",
-        },
+        }
       },
       clientName: {
         allowNull: false,
