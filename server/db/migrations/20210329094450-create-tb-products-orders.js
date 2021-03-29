@@ -9,15 +9,27 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       id: {
+        allowNull: false,
         type: Sequelize.UUID
       },
       productsID: {
-        type: Sequelize.UUID
+        allowNull: false,
+        type: Sequelize.UUID,
+        reference: {
+          model:'TBProducts' ,
+          key:'id'
+        }
       },
       ordersID: {
-        type: Sequelize.UUID
+        allowNull: false,
+        type: Sequelize.UUID,
+        reference: {
+          model:'TBOrders' ,
+          key:'id'
+        }
       },
       qtd: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       createdAt: {
