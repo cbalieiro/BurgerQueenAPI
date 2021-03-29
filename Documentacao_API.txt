@@ -45,7 +45,7 @@ Planejamento de Estrutura de "Orders"
 
 Nome da Tabela: TBProductsOrders
 
-npx sequelize-cli model:generate --name TBProductsOrders --attributes id: uuid,productsID:uuid,ordersID:uuid,qtd
+npx sequelize-cli model:generate --name TBProductsOrders --attributes id: uuid,productsID:uuid,ordersID:uuid,qtd:integer
 
 Modelo (Example Value):
 
@@ -54,7 +54,7 @@ Modelo (Example Value):
 "id" : "Auto Increment by Database" (Primary Key),
 "productsID" : ( Primary Key de Products - Vinculo de relacionamento de Tabela - "TBProducts") ,
 "ordersID" : ( Primary Key de Orders - Vinculo de relacionamento de Tabela - "TBOrders") ,
-"qtd" : "decimal" (Password) ,
+"qtd" : "integer" (Quantidades) ,
 }
 ]
 
