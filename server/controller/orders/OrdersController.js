@@ -32,10 +32,28 @@ const postOrders = async (req, res) => {
   return res.status(201).json(savedOrder);
 };
 
-// const getAllOrders = (req, res) => {
-//   console.log("você também pode utilizar o console para visualizar =)");
-//   res.send("Request feita");
-// };
+const getAllOrders = (req, res, next) => {
+  const parameters = {
+    include: [
+      {
+        model: base.TBProducts,
+        as: "TBProducts",
+        required: false,
+        attributes: ["id", "name", "typeProducts"],
+        through: {
+          model: base.TBProductsOrders,
+          as: "TBProductsOrders",
+          attributes: ["qtd"],
+        },
+      },
+    ],
+  };
+
+  functions
+    .findAllSelect(base.TBOrders, parameters)
+    .then((data) => res.status(200).json(data))
+    .catch(next);
+};
 
 const getOrderByID = (req, res, next) => {
   const { id } = req.params;
@@ -63,4 +81,4 @@ const getOrderByID = (req, res, next) => {
     .catch(next);
 };
 
-module.exports = { postOrders, getOrderByID };
+module.exports = { postOrders, getOrderByID, getAllOrders };
