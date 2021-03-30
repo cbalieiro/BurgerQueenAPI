@@ -1,7 +1,8 @@
-'use strict';
+/* eslint-disable no-unused-vars */
 const {
-  Model
-} = require('sequelize');
+  Model,
+} = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
   class TBProductsOrders extends Model {
     /**
@@ -12,15 +13,14 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-  };
+  }
   TBProductsOrders.init({
-    id: DataTypes.UUID,
     productsID: DataTypes.UUID,
     ordersID: DataTypes.UUID,
-    qtd: DataTypes.INTEGER
+    qtd: DataTypes.INTEGER,
   }, {
     sequelize,
-    modelName: 'TBProductsOrders',
+    modelName: "TBProductsOrders",
   });
   return TBProductsOrders;
 };

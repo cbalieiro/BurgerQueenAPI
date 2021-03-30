@@ -24,7 +24,6 @@ module.exports = {
       },
       status: {
         allowNull: false,
-        defaultValue: "pending",
         type: Sequelize.STRING,
       },
       comments: {
@@ -33,7 +32,6 @@ module.exports = {
       },
       processedAt: {
         allowNull: false,
-        defaultValue: Date.now(),
         type: Sequelize.DATE,
       },
       createdAt: {

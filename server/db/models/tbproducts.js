@@ -1,5 +1,5 @@
-"use strict";
 const { Model } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
   class TBProducts extends Model {
     /**
@@ -8,12 +8,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      TBProducts.belongsToMany(models.TBOrders,{
-        through: 'TBProductsOrders',
-        as: 'TBOrders',
-        foreignKey: 'productsID',
-        otherKey:'ordersID'
-      })
+      TBProducts.belongsToMany(models.TBOrders, {
+        through: "TBProductsOrders",
+        as: "TBOrders",
+        foreignKey: "productsID",
+        otherKey: "ordersID",
+      });
     }
   }
   TBProducts.init(
@@ -71,7 +71,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "TBProducts",
-    }
+    },
   );
   return TBProducts;
 };

@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const base = require("../../db/models");
 const functions = require("../../sequilezeFunctions");
 
@@ -5,9 +6,7 @@ const getAllUsers = (req, res, next) => {
   const parameters = { attributes: { exclude: ["password"] } };
   functions
     .findAllSelect(base.TBUsers, parameters)
-    .then((data) => {
-      return res.status(200).json(data);
-    })
+    .then((data) => res.status(200).json(data))
     .catch(next);
 };
 
@@ -23,17 +22,19 @@ const getUsersByID = (req, res, next) => {
   };
   functions
     .findAllSelect(base.TBUsers, parameters)
-    .then((data) => {
-      return res.status(200).json(data);
-    })
+    .then((data) => res.status(200).json(data))
     .catch(next);
 };
 
 const postUser = async (req, res, next) => {
-  const { email, name, password, role, restaurante } = req.body;
+  const {
+    email, name, password, role, restaurant,
+  } = req.body;
   const parameters = {
     where: { email },
-    defaults: { email, name, password, role, restaurante },
+    defaults: {
+      email, name, password, role, restaurant,
+    },
   };
   functions
     .createSelectInsert(base.TBUsers, parameters)
@@ -51,15 +52,15 @@ const putUserByID = async (req, res, next) => {
     .updateDB(
       base.TBUsers,
       {
-        name: name,
-        password: password,
-        role: role,
+        name,
+        password,
+        role,
       },
       {
         where: {
           id: Number(id),
         },
-      }
+      },
     )
     .then((data) => {
       if (data === 1 || data === true) {
@@ -81,9 +82,7 @@ const deleteUserByID = async (req, res, next) => {
   const parameters = { where: { id: Number(id) } };
   functions
     .destroyDelete(base.TBUsers, parameters)
-    .then((data) => {
-      return res.status(201).json(data);
-    })
+    .then((data) => res.status(201).json(data))
     .catch(next);
 };
 
