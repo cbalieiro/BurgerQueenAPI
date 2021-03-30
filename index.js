@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -10,10 +11,8 @@ app.use(cors());
 app.use(express.json());
 app.use("/", routes);
 app.use((err, req, res, next) => {
-  if (["production", "test", "development"].includes(process.env.NODE_ENV))
-    res.status(500).json({ error: "internal server error" });
-  else 
-  return next(err);
+  if (["production", "test", "development"].includes(process.env.NODE_ENV)) res.status(500).json({ error: "internal server error" });
+  else return next(err);
 });
 
 app.get("/", (req, res) => {

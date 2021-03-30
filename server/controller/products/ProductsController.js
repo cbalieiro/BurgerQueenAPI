@@ -16,7 +16,7 @@ const getProductsByID = (req, res, next) => {
 };
 
 const postProduct = (req, res, next) => {
-  const bodyInput = req.body;
+  const bodyInput = req.body; /** desconstruir */
   functions
     .createInsert(base.TBProducts, bodyInput)
     .then((data) => res.status(201).json(data))
