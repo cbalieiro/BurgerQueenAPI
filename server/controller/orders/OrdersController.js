@@ -78,6 +78,23 @@ const getOrderByID = (req, res, next) => {
     .catch(next);
 };
 
+const putOrderByID = async (req, res, next) => {
+  const { id } = req.params;
+  const { status } = req.body;
+  functions
+    .updateDB(
+      base.TBOrders,
+      { status },
+      {
+        where: {
+          id: Number(id),
+        },
+      },
+    )
+    .then((data) => res.status(201).json(data))
+    .catch(next);
+};
+
 const deleteOrderByID = async (req, res, next) => {
   const { id } = req.params;
   const parameters = { where: { id: Number(id) } };
@@ -87,4 +104,4 @@ const deleteOrderByID = async (req, res, next) => {
     .catch(next);
 };
 
-module.exports = { postOrders, getOrderByID, getAllOrders, deleteOrderByID };
+module.exports = { postOrders, getOrderByID, getAllOrders, putOrderByID, deleteOrderByID };
