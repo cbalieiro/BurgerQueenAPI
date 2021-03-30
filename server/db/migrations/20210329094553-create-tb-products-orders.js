@@ -22,6 +22,7 @@ module.exports = {
           model: "TBOrders",
           key: "id",
         },
+        onDelete: "CASCADE",
       },
       qtd: {
         allowNull: false,

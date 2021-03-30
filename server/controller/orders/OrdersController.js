@@ -1,11 +1,10 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable consistent-return */
 const base = require("../../db/models");
 const functions = require("../../sequilezeFunctions");
 
 const postOrders = async (req, res) => {
-  const {
-    userID, clientName, table, status, comments, products,
-  } = req.body;
+  const { userID, clientName, table, status, comments, products } = req.body;
   const parameters = {
     userID,
     clientName,
@@ -42,13 +41,12 @@ const getAllOrders = (req, res, next) => {
         attributes: ["id", "name", "typeProducts"],
         through: {
           model: base.TBProductsOrders,
-          as: "TBProductsOrders",
+          as: "qtd",
           attributes: ["qtd"],
         },
       },
     ],
   };
-
   functions
     .findAllSelect(base.TBOrders, parameters)
     .then((data) => res.status(200).json(data))
@@ -57,7 +55,6 @@ const getAllOrders = (req, res, next) => {
 
 const getOrderByID = (req, res, next) => {
   const { id } = req.params;
-
   const parameters = {
     where: { id: Number(id) },
     include: [
@@ -68,7 +65,7 @@ const getOrderByID = (req, res, next) => {
         attributes: ["id", "name", "typeProducts"],
         through: {
           model: base.TBProductsOrders,
-          as: "TBProductsOrders",
+          as: "qtd",
           attributes: ["qtd"],
         },
       },
@@ -81,4 +78,13 @@ const getOrderByID = (req, res, next) => {
     .catch(next);
 };
 
-module.exports = { postOrders, getOrderByID, getAllOrders };
+const deleteOrderByID = async (req, res, next) => {
+  const { id } = req.params;
+  const parameters = { where: { id: Number(id) } };
+  functions
+    .destroyDelete(base.TBOrders, parameters)
+    .then((data) => res.status(201).json(data))
+    .catch(next);
+};
+
+module.exports = { postOrders, getOrderByID, getAllOrders, deleteOrderByID };

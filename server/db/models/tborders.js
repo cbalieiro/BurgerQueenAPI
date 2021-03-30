@@ -1,6 +1,4 @@
-const {
-  Model,
-} = require("sequelize");
+const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class TBOrders extends Model {
@@ -14,20 +12,24 @@ module.exports = (sequelize, DataTypes) => {
         through: "TBProductsOrders",
         as: "TBProducts",
         foreignKey: "ordersID",
+        onDelete: "CASCADE",
         otherKey: "productsID",
       });
     }
   }
-  TBOrders.init({
-    userID: DataTypes.INTEGER,
-    clientName: DataTypes.STRING,
-    table: DataTypes.INTEGER,
-    status: DataTypes.STRING,
-    comments: DataTypes.STRING,
-    processedAt: DataTypes.DATE,
-  }, {
-    sequelize,
-    modelName: "TBOrders",
-  });
+  TBOrders.init(
+    {
+      userID: DataTypes.INTEGER,
+      clientName: DataTypes.STRING,
+      table: DataTypes.INTEGER,
+      status: DataTypes.STRING,
+      comments: DataTypes.STRING,
+      processedAt: DataTypes.DATE,
+    },
+    {
+      sequelize,
+      modelName: "TBOrders",
+    },
+  );
   return TBOrders;
 };
