@@ -2,11 +2,6 @@ const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class TBProducts extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       TBProducts.belongsToMany(models.TBOrders, {
         through: "TBProductsOrders",
@@ -28,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       typeProducts: {
-        allowNull: true,
+        allowNull: true, /** TypeProducts é opcional */
         type: DataTypes.STRING,
       },
       category: {

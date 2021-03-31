@@ -2,11 +2,6 @@ const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class TBOrders extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       TBOrders.belongsToMany(models.TBProducts, {
         through: "TBProductsOrders",
@@ -19,12 +14,36 @@ module.exports = (sequelize, DataTypes) => {
   }
   TBOrders.init(
     {
-      userID: DataTypes.INTEGER,
-      clientName: DataTypes.STRING,
-      table: DataTypes.INTEGER,
-      status: DataTypes.STRING,
-      comments: DataTypes.STRING,
-      processedAt: DataTypes.DATE,
+      userID: {
+        allowNull: false,
+        type: DataTypes.UUID,
+        validate: {
+          notEmpty: {
+            msg: "The UserID field must not be empty",
+          },
+        },
+      },
+      clientName: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: {
+            msg: "The  ClientName field must not be empty",
+          },
+        },
+      },
+      table: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        validate: {
+          notEmpty: {
+            msg: "The  Table field must not be empty",
+          },
+        },
+      },
+      status: DataTypes.STRING, /** Status atualizado automaticamente na criação */
+      comments: DataTypes.STRING, /** Comments podem ou não serem adicionados */
+      processedAt: DataTypes.DATE, /** ProcessedAt serão atualizados durante o update */
     },
     {
       sequelize,
