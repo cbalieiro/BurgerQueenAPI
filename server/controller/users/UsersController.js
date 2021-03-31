@@ -87,7 +87,7 @@ const putUserByID = async (req, res, next) => {
         where: {
           id: Number(id),
         },
-      }
+      },
     )
     .then((data) => {
       if (data[0] === 1 || data[0] === true) {
