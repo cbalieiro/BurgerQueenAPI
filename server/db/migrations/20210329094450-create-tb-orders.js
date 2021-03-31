@@ -8,7 +8,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       userID: {
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
         references: {
           model: "TBUsers",
           key: "id",

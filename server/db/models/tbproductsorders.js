@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   TBProductsOrders.init(
     {
       productsID: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         validate: {
           notEmpty: {
             msg: "The Product ID field must not be empty",
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       ordersID: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         validate: {
           notEmpty: {
             msg: "The Order ID field must not be empty",

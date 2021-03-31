@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       userID: {
         allowNull: false,
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         validate: {
           notEmpty: {
             msg: "The UserID field must not be empty",
