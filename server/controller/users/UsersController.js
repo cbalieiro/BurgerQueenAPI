@@ -23,7 +23,15 @@ const getUsersByID = (req, res, next) => {
   };
   functions
     .findAllSelect(base.TBUsers, parameters)
-    .then((data) => res.status(200).json(data))
+    .then((data) => {
+      if (data.length === 0) {
+        return res.status(400).json({
+          code: 400,
+          message: "User not found",
+        });
+      }
+      res.status(200).json(data);
+    })
     .catch(next);
 };
 
@@ -59,7 +67,14 @@ const postUser = async (req, res, next) => {
 
 const putUserByID = async (req, res, next) => {
   const { id } = req.params;
-  const { name, password, role } = req.body;
+  const { name, password, email, restaurant, role } = req.body;
+
+  if (email || restaurant) {
+    return res.status(400).json({
+      code: 400,
+      status: "User information couldn't be changed",
+    });
+  }
   functions
     .updateDB(
       base.TBUsers,
@@ -72,7 +87,7 @@ const putUserByID = async (req, res, next) => {
         where: {
           id: Number(id),
         },
-      },
+      }
     )
     .then((data) => {
       if (data[0] === 1 || data[0] === true) {
