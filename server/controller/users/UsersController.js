@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable consistent-return */
 const base = require("../../db/models");
 const functions = require("../../sequilezeFunctions");
@@ -27,20 +28,31 @@ const getUsersByID = (req, res, next) => {
 };
 
 const postUser = async (req, res, next) => {
-  const {
-    email, name, password, role, restaurant,
-  } = req.body;
+  const { email, name, password, role, restaurant } = req.body;
   const parameters = {
     where: { email },
     defaults: {
-      email, name, password, role, restaurant,
+      email,
+      name,
+      password,
+      role,
+      restaurant,
     },
   };
   functions
     .createSelectInsert(base.TBUsers, parameters)
     .then((data) => {
-      console.log(data); /** corrigir tratativa de errors */
-      return res.status(201).json(data);
+      const verifiedStatus = data[1];
+      const result = data[0];
+      if (verifiedStatus === true) {
+        return res.status(201).json(result);
+      }
+      if (verifiedStatus === false) {
+        return res.status(400).json({
+          code: 400,
+          message: "The provided e-mail is already registered.",
+        });
+      }
     })
     .catch(next);
 };
@@ -63,13 +75,15 @@ const putUserByID = async (req, res, next) => {
       },
     )
     .then((data) => {
-      if (data === 1 || data === true) {
+      if (data[0] === 1 || data[0] === true) {
         return res.status(201).json({
+          code: 201,
           status: "User information has been successfully changed",
         });
       }
-      if (data === 0 || data === false) {
+      if (data[0] === 0 || data[0] === false) {
         return res.status(400).json({
+          code: 400,
           status: "User information couldn't be changed",
         });
       }
