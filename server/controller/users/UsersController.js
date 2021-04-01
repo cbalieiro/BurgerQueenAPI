@@ -7,7 +7,15 @@ const getAllUsers = (req, res, next) => {
   const parameters = { attributes: { exclude: ["password"] } };
   functions
     .findAllSelect(base.TBUsers, parameters)
-    .then((data) => res.status(200).json(data))
+    .then((data) => {
+      if (data.length === 0) {
+        return res.status(400).json({
+          code: 400,
+          message: "Products not found",
+        });
+      }
+      res.status(200).json(data);
+    })
     .catch(next);
 };
 

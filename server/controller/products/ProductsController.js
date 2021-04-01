@@ -1,17 +1,34 @@
+/* eslint-disable consistent-return */
 const base = require("../../db/models");
 const functions = require("../../sequilezeFunctions");
 
 const getAllProducts = (req, res, next) => {
   functions.findAllSelect(base.TBProducts)
-    .then((resolve) => res.status(200).json(resolve)
-      .catch(next));
+    .then((data) => {
+      if (data.length === 0) {
+        return res.status(400).json({
+          code: 400,
+          message: "Products not found",
+        });
+      }
+      res.status(200).json(data);
+    })
+    .catch(next);
 };
 
 const getProductsByID = (req, res, next) => {
   const { id } = req.params;
   functions
     .findByPkSelect(base.TBProducts, id)
-    .then((data) => res.status(200).json(data))
+    .then((data) => {
+      if (data === null) {
+        return res.status(400).json({
+          code: 400,
+          message: "Product not found",
+        });
+      }
+      res.status(200).json(data);
+    })
     .catch(next);
 };
 
