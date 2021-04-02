@@ -116,7 +116,20 @@ const putOrderByID = async (req, res, next) => {
         },
       },
     )
-    .then((data) => res.status(201).json(data))
+    .then((data) => {
+      if (data[0] === 1 || data[0] === true) {
+        return res.status(201).json({
+          code: 201,
+          status: "Order information has been successfully changed",
+        });
+      }
+      if (data[0] === 0 || data[0] === false) {
+        return res.status(400).json({
+          code: 400,
+          status: "Order information couldn't be changed",
+        });
+      }
+    })
     .catch(next);
 };
 
@@ -125,7 +138,20 @@ const deleteOrderByID = async (req, res, next) => {
   const parameters = { where: { id: Number(id) } };
   functions
     .destroyDelete(base.TBOrders, parameters)
-    .then((data) => res.status(201).json(data))
+    .then((data) => {
+      if (data === 1 || data === true) {
+        return res.status(201).json({
+          code: 201,
+          status: "Order was successfully deleted",
+        });
+      }
+      if (data === 0 || data === false) {
+        return res.status(400).json({
+          code: 400,
+          status: "Order couldn't be deleted",
+        });
+      }
+    })
     .catch(next);
 };
 
