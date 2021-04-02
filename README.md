@@ -1,7 +1,7 @@
 # Burger Queen API  - Back-end (readMe em Construção)
 
 
-🌟 Uma _API rest_ para pedidos em um restaurante 🍔. Link para consumo da API [clique aqui!]() 🌟 
+🌟 Uma _API rest_ para pedidos em um restaurante 🍔. Link para consumo da API [clique aqui!](https://cbmo-burger-queen-api.herokuapp.com) 🌟 
 
 
 ## Índice
@@ -10,10 +10,8 @@
  <a href="#-desafio">Desafio</a> •
  <a href="#-introdução">Introdução</a> •
  <a href="#-processo-de-criação">Processo de criação</a> • 
- <a href="#-como-executar-o-projeto">Como executar o projeto</a> • 
  <a href="#-tecnologias">Tecnologias</a> • 
- <a href="#-créditos">Créditos</a> • 
- <a href="#-desenvolvedoras">Desenvolvedoras</a> • 
+ <a href="#-desenvolvedora">Desenvolvedora</a> • 
 </p>
 
 ---
@@ -39,7 +37,7 @@ A interface front-end da aplicação Burger Queen já foi criado. Para acessar [
 
 📆 **Organização e planejamento**
 
-Esse trabalho foi desenvolvido sob demanda e já recebemos as definições prontas, a partir disso o [planejamento]() foi dividindo por três sprint de 7 dias cada. 📋
+Esse trabalho foi desenvolvido sob demanda e já recebemos as definições prontas, a partir disso o planejamento foi dividindo por três sprint de 7 dias cada. 📋
 
 ##
 <br/>
@@ -83,15 +81,86 @@ A API possui os seguintes endpoints:
 
 <br/>
 
-🔎 **Testes de usabilidade**
+**Detalhes sobre a Configuração**
 
-Realizamos testes durante a criação para identificar se o consumo e retornos. Os pontos levantados foram:
+<br/>
 
-&nbsp;
-⚠️  .
+Relacionamento de Tabelas:
 
-&nbsp;
-✔️  .
+<br/>
+
+<div align="center" id='topo'>
+  <img width="400" height="400" src="./img/ER_Diagrama.png"></img>
+</div>
+
+<br/>
+
+Tabelas de Produtos:
+
+<br/>
+
+<div align="center" id='topo'>
+  <img src="./img/products.png"></img>
+</div>
+
+<br/>
+
+🔎 **Testes**
+
+Para testes com a API. Segue Modelos:
+
+Users:
+
+{
+    // {id} Auto Increment by API
+    "id": INTEGER,
+    
+     // Required fields:
+    "name": "STRING",
+    "email": "STRING",
+    "role": "STRING",
+    "restaurant": "burgerlicious",
+    
+    // { createdAt,updatedAt } Auto Increment by API
+    "createdAt": "2021-03-31T11:48:13.536Z",
+    "updatedAt": "2021-03-31T12:01:44.347Z"
+  }
+  
+Products
+
+{
+    // {id} Auto Increment by API
+    "id":  INTEGER,
+    
+    // Required fields:
+    "name": "STRING",
+    "typeProducts": "STRING",
+    "category": "STRING",
+    "image": "STRING",
+    "price": NUMERIC,
+    "typeMenu": "STRING",
+    
+    // { createdAt,updatedAt } Auto Increment by API
+    "createdAt": "2021-04-01T19:55:44.812Z",
+    "updatedAt": "2021-04-01T19:55:44.812Z"
+}
+
+
+{   // {id} Auto Increment by API
+    "id":  INTEGER,
+    
+    "userID":  INTEGER,
+    "clientName": "STRING",
+    "table":  INTEGER,
+    "comments": "STRING",
+    "products": [
+    {
+      "id":  INTEGER,
+      "qtd":  INTEGER,
+    }]
+
+}
+
 
 <br/>
 
