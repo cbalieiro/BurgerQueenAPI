@@ -10,7 +10,7 @@ const getAllOrders = (req, res, next) => {
         model: base.TBProducts,
         as: "TBProducts",
         required: false,
-        attributes: ["id", "name", "typeProducts"],
+        attributes: ["id", "name", "typeProducts", "category", "image", "price", "typeMenu"],
         through: {
           model: base.TBProductsOrders,
           as: "qtd",
@@ -42,7 +42,7 @@ const getOrderByID = (req, res, next) => {
         model: base.TBProducts,
         as: "TBProducts",
         required: false,
-        attributes: ["id", "name", "typeProducts"],
+        attributes: ["id", "name", "typeProducts", "category", "image", "price", "typeMenu"],
         through: {
           model: base.TBProductsOrders,
           as: "qtd",
