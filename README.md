@@ -1,5 +1,4 @@
-# Burger Queen API  - Back-end (readMe em Construção)
-
+# Burger Queen API  - Back-end
 
 🌟 Uma _API rest_ para pedidos em um restaurante 🍔. Link para consumo da API [clique aqui!](https://cbmo-burger-queen-api.herokuapp.com) 🌟 
 
