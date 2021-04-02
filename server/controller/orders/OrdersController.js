@@ -75,6 +75,15 @@ const postOrders = async (req, res) => {
     status,
     comments,
   };
+
+  const user = await base.TBUsers.findByPk(userID);
+
+  if (!user) {
+    return res.status(400).json({
+      code: 400,
+      message: "userID not found.",
+    });
+  }
   const savedOrder = await base.TBOrders.create(parameters);
   const { id } = savedOrder;
 
