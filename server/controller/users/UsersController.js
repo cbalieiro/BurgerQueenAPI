@@ -119,7 +119,20 @@ const deleteUserByID = async (req, res, next) => {
   const parameters = { where: { id: Number(id) } };
   functions
     .destroyDelete(base.TBUsers, parameters)
-    .then((data) => res.status(201).json(data))
+    .then((data) => {
+      if (data === 1 || data === true) {
+        return res.status(201).json({
+          code: 201,
+          status: "User was successfully deleted",
+        });
+      }
+      if (data === 0 || data === false) {
+        return res.status(400).json({
+          code: 400,
+          status: "User information couldn't be deleted",
+        });
+      }
+    })
     .catch(next);
 };
 
