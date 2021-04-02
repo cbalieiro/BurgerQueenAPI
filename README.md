@@ -75,11 +75,11 @@ A API possui os seguintes endpoints:
 
 ### `/orders`
 
-* [ ] `GET /orders`
-* [ ] `GET /orders/:orderid`
-* [ ] `POST /orders`
-* [ ] `PUT /orders/:orderid`
-* [ ] `DELETE /orders/:orderid`
+* [x] `GET /orders`
+* [x] `GET /orders/:orderid`
+* [x] `POST /orders`
+* [x] `PUT /orders/:orderid`
+* [x] `DELETE /orders/:orderid`
 
 <br/>
 
@@ -135,7 +135,7 @@ Realizamos testes durante a criação para identificar se o consumo e retornos. 
 
 ---
 
-## Desenvolvedoras
+## Desenvolvedora
 
 Projeto desenvolvido com entusiasmo por:
 
