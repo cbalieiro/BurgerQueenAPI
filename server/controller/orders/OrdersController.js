@@ -3,6 +3,69 @@
 const base = require("../../db/models");
 const functions = require("../../sequilezeFunctions");
 
+const getAllOrders = (req, res, next) => {
+  const parameters = {
+    include: [
+      {
+        model: base.TBProducts,
+        as: "TBProducts",
+        required: false,
+        attributes: ["id", "name", "typeProducts"],
+        through: {
+          model: base.TBProductsOrders,
+          as: "qtd",
+          attributes: ["qtd"],
+        },
+      },
+    ],
+  };
+  functions
+    .findAllSelect(base.TBOrders, parameters)
+    .then((data) => {
+      if (data.length === 0) {
+        return res.status(400).json({
+          code: 400,
+          message: "Orders not found",
+        });
+      }
+      res.status(200).json(data);
+    })
+    .catch(next);
+};
+
+const getOrderByID = (req, res, next) => {
+  const { id } = req.params;
+  const parameters = {
+    where: { id: Number(id) },
+    include: [
+      {
+        model: base.TBProducts,
+        as: "TBProducts",
+        required: false,
+        attributes: ["id", "name", "typeProducts"],
+        through: {
+          model: base.TBProductsOrders,
+          as: "qtd",
+          attributes: ["qtd"],
+        },
+      },
+    ],
+  };
+
+  functions
+    .findAllSelect(base.TBOrders, parameters)
+    .then((data) => {
+      if (data.length === 0) {
+        return res.status(400).json({
+          code: 400,
+          message: "Order not found",
+        });
+      }
+      res.status(200).json(data);
+    })
+    .catch(next);
+};
+
 const postOrders = async (req, res) => {
   const { userID, clientName, table, status, comments, products } = req.body;
   const parameters = {
@@ -31,53 +94,6 @@ const postOrders = async (req, res) => {
   return res.status(201).json(savedOrder);
 };
 
-const getAllOrders = (req, res, next) => {
-  const parameters = {
-    include: [
-      {
-        model: base.TBProducts,
-        as: "TBProducts",
-        required: false,
-        attributes: ["id", "name", "typeProducts"],
-        through: {
-          model: base.TBProductsOrders,
-          as: "qtd",
-          attributes: ["qtd"],
-        },
-      },
-    ],
-  };
-  functions
-    .findAllSelect(base.TBOrders, parameters)
-    .then((data) => res.status(200).json(data))
-    .catch(next);
-};
-
-const getOrderByID = (req, res, next) => {
-  const { id } = req.params;
-  const parameters = {
-    where: { id: Number(id) },
-    include: [
-      {
-        model: base.TBProducts,
-        as: "TBProducts",
-        required: false,
-        attributes: ["id", "name", "typeProducts"],
-        through: {
-          model: base.TBProductsOrders,
-          as: "qtd",
-          attributes: ["qtd"],
-        },
-      },
-    ],
-  };
-
-  functions
-    .findAllSelect(base.TBOrders, parameters)
-    .then((data) => res.status(200).json(data))
-    .catch(next);
-};
-
 const putOrderByID = async (req, res, next) => {
   const { id } = req.params;
   const { status } = req.body;
@@ -104,4 +120,10 @@ const deleteOrderByID = async (req, res, next) => {
     .catch(next);
 };
 
-module.exports = { postOrders, getOrderByID, getAllOrders, putOrderByID, deleteOrderByID };
+module.exports = {
+  postOrders,
+  getOrderByID,
+  getAllOrders,
+  putOrderByID,
+  deleteOrderByID,
+};
